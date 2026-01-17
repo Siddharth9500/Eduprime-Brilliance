@@ -37,22 +37,22 @@ const programsData = [
 
 const ProgramsSection = () => {
   return (
-    <section className="bg-beige py-20 relative">
-      <div className="container mx-auto px-4">
+    <section className="bg-beige py-12 sm:py-16 lg:py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-olive brush-underline inline-block">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-olive brush-underline inline-block">
             Our Programs
           </h2>
         </motion.div>
 
         {/* Programs Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {programsData.map((program, index) => (
             <motion.div
               key={program.id}
@@ -60,16 +60,16 @@ const ProgramsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`${program.color} ${program.borderColor} border-2 rounded-2xl p-6 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1`}
+              className={`${program.color} ${program.borderColor} border-2 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1`}
             >
-              <h3 className="font-serif text-xl font-bold text-olive mb-4">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-olive mb-3 sm:mb-4">
                 {program.title}
               </h3>
               
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 {program.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span className="w-1.5 h-1.5 rounded-full bg-olive" />
+                  <li key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-olive shrink-0" />
                     {feature}
                   </li>
                 ))}
@@ -77,17 +77,17 @@ const ProgramsSection = () => {
 
               <Button
                 variant="ghost"
-                className="w-full justify-between text-olive hover:bg-olive/10 rounded-xl group"
+                className="w-full justify-between text-olive hover:bg-olive/10 rounded-lg sm:rounded-xl group text-sm sm:text-base h-10 sm:h-11"
               >
                 Know More
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <WaveDivider fillColor="hsl(var(--olive))" className="mt-16" />
+      <WaveDivider fillColor="hsl(var(--olive))" className="mt-12 sm:mt-16" />
     </section>
   );
 };
