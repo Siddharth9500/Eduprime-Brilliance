@@ -47,16 +47,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          dark: "hsl(var(--cream-dark))",
         },
-        navy: {
-          DEFAULT: "hsl(var(--navy))",
-          dark: "hsl(var(--navy-dark))",
-          light: "hsl(var(--navy-light))",
+        beige: "hsl(var(--beige))",
+        olive: {
+          DEFAULT: "hsl(var(--olive))",
+          dark: "hsl(var(--olive-dark))",
+          light: "hsl(var(--olive-light))",
         },
-        cream: "hsl(var(--cream))",
+        mustard: {
+          DEFAULT: "hsl(var(--mustard))",
+          light: "hsl(var(--mustard-light))",
+        },
+        orange: {
+          DEFAULT: "hsl(var(--orange))",
+          light: "hsl(var(--orange-light))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -70,7 +78,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Playfair Display', 'Georgia', 'serif'],
+        serif: ['Merriweather', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -94,17 +102,12 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "count-up": {
-          from: { opacity: "0", transform: "translateY(10px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.5s ease-out",
-        "count-up": "count-up 0.8s ease-out",
       },
     },
   },

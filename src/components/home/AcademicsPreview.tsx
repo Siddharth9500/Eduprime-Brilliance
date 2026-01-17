@@ -1,92 +1,94 @@
-import { Link } from "react-router-dom";
-import { FlaskConical, TrendingUp, Palette, ArrowRight } from "lucide-react";
-import { academicStreams } from "@/data/siteData";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import WaveDivider from "@/components/WaveDivider";
 
-const iconMap = {
-  FlaskConical,
-  TrendingUp,
-  Palette,
+// Data for easy admin panel integration
+const academicsData = {
+  title: "What We Do",
+  description: "Our comprehensive curriculum combines traditional values with modern teaching methodologies. We focus on developing critical thinking, creativity, and a love for learning in every child.",
+  features: [
+    "CBSE & State Board curriculum",
+    "Hands-on learning experiences",
+    "Regular assessments & feedback",
+    "Parent-teacher collaboration",
+    "Extracurricular integration",
+  ],
 };
+
+// Photo collage data
+const collageImages = [
+  { id: 1, alt: "Science lab", emoji: "🔬" },
+  { id: 2, alt: "Art class", emoji: "🎨" },
+  { id: 3, alt: "Library", emoji: "📖" },
+  { id: 4, alt: "Sports", emoji: "⚽" },
+];
 
 const AcademicsPreview = () => {
   return (
-    <section className="py-20 bg-muted">
+    <section className="bg-cream py-20 relative">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-gold font-medium text-sm uppercase tracking-wider">Programs</span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-2">
-            Academic Excellence
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Choose from our comprehensive range of academic programs designed to nurture your potential
-          </p>
-        </div>
-
-        {/* Stream Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {academicStreams.map((stream, index) => {
-            const Icon = iconMap[stream.icon as keyof typeof iconMap];
-            return (
-              <div
-                key={stream.id}
-                className="group bg-card rounded-2xl p-8 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1 border border-border"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Icon */}
-                <div className="w-16 h-16 rounded-xl bg-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="h-8 w-8 text-gold" />
-                </div>
-
-                {/* Title */}
-                <h3 className="font-display text-2xl font-bold text-foreground mb-4">
-                  {stream.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-muted-foreground mb-6">{stream.description}</p>
-
-                {/* Subjects */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {stream.subjects.slice(0, 3).map((subject) => (
-                    <span
-                      key={subject}
-                      className="px-3 py-1 bg-gold/10 text-gold rounded-full text-sm font-medium"
-                    >
-                      {subject}
-                    </span>
-                  ))}
-                  {stream.subjects.length > 3 && (
-                    <span className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm">
-                      +{stream.subjects.length - 3} more
-                    </span>
-                  )}
-                </div>
-
-                {/* Link */}
-                <Link
-                  to="/academics"
-                  className="inline-flex items-center gap-2 text-primary font-medium group-hover:text-gold transition-colors"
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:order-1"
+          >
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-olive mb-6 brush-underline inline-block">
+              {academicsData.title}
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8 mt-8">
+              {academicsData.description}
+            </p>
+            
+            <ul className="space-y-4">
+              {academicsData.features.map((feature, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="flex items-center gap-3"
                 >
-                  Learn More
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                  <span className="w-2 h-2 rounded-full bg-mustard" />
+                  <span className="text-olive">{feature}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <Link to="/academics">
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              View All Programs
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          {/* Right - Photo Collage */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 gap-4 lg:order-2"
+          >
+            {collageImages.map((image, index) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`bg-beige rounded-2xl shadow-card overflow-hidden flex items-center justify-center ${
+                  index === 3 ? "row-span-2 aspect-[3/4]" : "aspect-square"
+                }`}
+              >
+                <div className="text-center p-6">
+                  <span className="text-5xl">{image.emoji}</span>
+                  <p className="text-muted-foreground text-sm mt-2">{image.alt}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
+
+      <WaveDivider fillColor="hsl(var(--beige))" className="mt-16" />
     </section>
   );
 };

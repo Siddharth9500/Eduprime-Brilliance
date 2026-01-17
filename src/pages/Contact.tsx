@@ -1,12 +1,25 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WaveDivider from "@/components/WaveDivider";
 import { siteInfo } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+
+// Data for easy admin panel integration
+const contactInfo = {
+  address: siteInfo.address,
+  phone: siteInfo.phone,
+  email: siteInfo.email,
+  hours: [
+    { day: "Monday - Friday", time: "8:00 AM - 5:00 PM" },
+    { day: "Saturday", time: "9:00 AM - 1:00 PM" },
+  ],
+};
 
 const Contact = () => {
   const { toast } = useToast();
@@ -22,7 +35,6 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
@@ -39,96 +51,111 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-cream">
       <Navbar />
       <main>
         {/* Hero */}
-        <section className="pt-32 pb-20 gradient-hero">
+        <section className="pt-32 pb-8 bg-cream">
           <div className="container mx-auto px-4 text-center">
-            <span className="text-gold font-medium text-sm uppercase tracking-wider">Reach Out</span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mt-4">
-              Get in Touch
-            </h1>
-            <p className="text-primary-foreground/80 mt-6 max-w-2xl mx-auto text-lg">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond promptly.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <span className="text-mustard font-medium text-sm uppercase tracking-wider">Reach Out</span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-olive mt-4">
+                Get in Touch
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-2xl mx-auto text-lg">
+                Have questions? We'd love to hear from you. Send us a message and we'll respond promptly.
+              </p>
+            </motion.div>
           </div>
+          <WaveDivider fillColor="hsl(var(--beige))" className="mt-12" />
         </section>
 
         {/* Contact Section */}
-        <section className="py-20">
+        <section className="py-20 bg-beige">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
               {/* Contact Info */}
-              <div>
-                <h2 className="font-display text-2xl font-bold text-foreground mb-8">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="font-serif text-2xl font-bold text-olive mb-8">
                   Contact Information
                 </h2>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shrink-0">
-                      <MapPin className="h-6 w-6 text-gold" />
+                    <div className="w-12 h-12 rounded-xl bg-mustard flex items-center justify-center shrink-0">
+                      <MapPin className="h-6 w-6 text-olive" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">Address</h3>
-                      <p className="text-muted-foreground mt-1">{siteInfo.address}</p>
+                      <h3 className="font-serif font-bold text-olive">Address</h3>
+                      <p className="text-muted-foreground mt-1">{contactInfo.address}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shrink-0">
-                      <Phone className="h-6 w-6 text-gold" />
+                    <div className="w-12 h-12 rounded-xl bg-mustard flex items-center justify-center shrink-0">
+                      <Phone className="h-6 w-6 text-olive" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">Phone</h3>
-                      <p className="text-muted-foreground mt-1">{siteInfo.phone}</p>
+                      <h3 className="font-serif font-bold text-olive">Phone</h3>
+                      <p className="text-muted-foreground mt-1">{contactInfo.phone}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shrink-0">
-                      <Mail className="h-6 w-6 text-gold" />
+                    <div className="w-12 h-12 rounded-xl bg-mustard flex items-center justify-center shrink-0">
+                      <Mail className="h-6 w-6 text-olive" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">Email</h3>
-                      <p className="text-muted-foreground mt-1">{siteInfo.email}</p>
+                      <h3 className="font-serif font-bold text-olive">Email</h3>
+                      <p className="text-muted-foreground mt-1">{contactInfo.email}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shrink-0">
-                      <Clock className="h-6 w-6 text-gold" />
+                    <div className="w-12 h-12 rounded-xl bg-mustard flex items-center justify-center shrink-0">
+                      <Clock className="h-6 w-6 text-olive" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">Office Hours</h3>
-                      <p className="text-muted-foreground mt-1">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                      <p className="text-muted-foreground">Saturday: 9:00 AM - 1:00 PM</p>
+                      <h3 className="font-serif font-bold text-olive">Office Hours</h3>
+                      {contactInfo.hours.map((hour, index) => (
+                        <p key={index} className="text-muted-foreground mt-1">{hour.day}: {hour.time}</p>
+                      ))}
                     </div>
                   </div>
                 </div>
 
                 {/* Map Placeholder */}
-                <div className="mt-8 aspect-video bg-muted rounded-2xl overflow-hidden border border-border">
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-navy/5 to-navy/10">
+                <div className="mt-8 aspect-video bg-cream rounded-2xl overflow-hidden border border-border">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-olive/5 to-olive/10">
                     <div className="text-center">
-                      <MapPin className="h-12 w-12 text-primary/30 mx-auto mb-2" />
+                      <MapPin className="h-12 w-12 text-olive/30 mx-auto mb-2" />
                       <p className="text-muted-foreground text-sm">Interactive Map</p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Contact Form */}
-              <div>
-                <h2 className="font-display text-2xl font-bold text-foreground mb-8">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="font-serif text-2xl font-bold text-olive mb-8">
                   Send Us a Message
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-olive mb-2">
                         Your Name
                       </label>
                       <Input
@@ -138,11 +165,11 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="John Doe"
                         required
-                        className="h-12"
+                        className="h-12 rounded-xl bg-cream border-border"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-olive mb-2">
                         Email Address
                       </label>
                       <Input
@@ -153,13 +180,13 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="john@example.com"
                         required
-                        className="h-12"
+                        className="h-12 rounded-xl bg-cream border-border"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-olive mb-2">
                       Subject
                     </label>
                     <Input
@@ -169,12 +196,12 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="How can we help?"
                       required
-                      className="h-12"
+                      className="h-12 rounded-xl bg-cream border-border"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-olive mb-2">
                       Message
                     </label>
                     <Textarea
@@ -185,14 +212,14 @@ const Contact = () => {
                       placeholder="Your message..."
                       required
                       rows={6}
-                      className="resize-none"
+                      className="resize-none rounded-xl bg-cream border-border"
                     />
                   </div>
 
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-primary hover:bg-navy-dark text-primary-foreground h-14"
+                    className="w-full bg-olive hover:bg-olive-dark text-cream h-14 rounded-xl"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -205,7 +232,7 @@ const Contact = () => {
                     )}
                   </Button>
                 </form>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
